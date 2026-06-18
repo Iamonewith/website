@@ -65,5 +65,11 @@ Then open http://localhost:4321 in your browser. Press Ctrl+C to stop.
 
 ## Environment / secrets
 
-- `.env.local` — contains the Cloudflare API token (never committed to git)
-- If the token stops working, create a new one at https://dash.cloudflare.com/profile/api-tokens using the "Edit Cloudflare Workers" template and update `.env.local`
+`.env.local` contains two Cloudflare API tokens (never committed to git):
+
+| Variable | Purpose | Template to recreate |
+|---|---|---|
+| `CLOUDFLARE_API_TOKEN` | Deploy to Pages via Wrangler | "Edit Cloudflare Workers" |
+| `CLOUDFLARE_DNS_TOKEN` | Manage DNS records | "Edit zone DNS" |
+
+If either token stops working, create a new one at https://dash.cloudflare.com/profile/api-tokens and update `.env.local`.
