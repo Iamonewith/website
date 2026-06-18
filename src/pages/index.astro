@@ -51,13 +51,14 @@
         z-index: 100;
         background: var(--white);
         border-bottom: 1px solid var(--border);
-        padding: 0 2rem;
+        padding: 0 1.5rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
         height: 72px;
+        gap: 1rem;
       }
-      .nav-logo img { height: 44px; width: auto; }
+      .nav-logo img { height: 56px; width: auto; max-width: 180px; object-fit: contain; }
       .nav-links {
         display: flex;
         gap: 0;
@@ -70,16 +71,17 @@
         align-items: center;
       }
       .nav-links > li > a {
-        padding: 0 1rem;
-        font-size: 0.78rem;
+        padding: 0 0.65rem;
+        font-size: 0.72rem;
         font-weight: 500;
-        letter-spacing: 0.1em;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
         color: var(--navy);
         height: 100%;
         display: flex;
         align-items: center;
         transition: color 0.2s;
+        white-space: nowrap;
       }
       .nav-links > li > a:hover { color: var(--teal); }
       .nav-links > li > a.has-drop::after {
