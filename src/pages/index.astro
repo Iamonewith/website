@@ -1,17 +1,396 @@
 ---
-
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Iamonewith — Placeholder</title>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root {
+        --black: #0a0a0a;
+        --white: #ffffff;
+        --accent: #6c63ff;
+        --accent-light: #a29bfe;
+        --muted: #888;
+        --surface: #f5f5f5;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+
+      body { background: var(--white); color: var(--black); }
+
+      /* NAV */
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.25rem 2rem;
+        border-bottom: 1px solid #eee;
+        position: sticky;
+        top: 0;
+        background: var(--white);
+        z-index: 10;
+      }
+      .logo { font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em; }
+      .nav-links { display: flex; gap: 2rem; list-style: none; }
+      .nav-links a { text-decoration: none; color: var(--black); font-size: 0.9rem; }
+      .nav-links a:hover { color: var(--accent); }
+      .nav-cta {
+        background: var(--black);
+        color: var(--white);
+        padding: 0.5rem 1.25rem;
+        border-radius: 999px;
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+
+      /* HERO */
+      .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 6rem 2rem 5rem;
+        gap: 1.5rem;
+      }
+      .hero-badge {
+        background: #f0eeff;
+        color: var(--accent);
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 0.3rem 0.9rem;
+        border-radius: 999px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .hero h1 {
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-weight: 800;
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        max-width: 700px;
+      }
+      .hero h1 span { color: var(--accent); }
+      .hero p {
+        font-size: 1.15rem;
+        color: var(--muted);
+        max-width: 520px;
+        line-height: 1.7;
+      }
+      .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+      .btn-primary {
+        background: var(--accent);
+        color: var(--white);
+        padding: 0.75rem 2rem;
+        border-radius: 999px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+      .btn-secondary {
+        border: 1.5px solid #ddd;
+        color: var(--black);
+        padding: 0.75rem 2rem;
+        border-radius: 999px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+      }
+      .hero-image {
+        width: 100%;
+        max-width: 860px;
+        height: 400px;
+        background: linear-gradient(135deg, #f0eeff 0%, #e8f4fd 100%);
+        border-radius: 1.5rem;
+        border: 1px solid #e0e0e0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-top: 1rem;
+      }
+
+      /* LOGOS */
+      .logos {
+        padding: 3rem 2rem;
+        text-align: center;
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+      }
+      .logos p { color: var(--muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2rem; }
+      .logo-row { display: flex; justify-content: center; align-items: center; gap: 3rem; flex-wrap: wrap; }
+      .logo-pill {
+        background: var(--surface);
+        border-radius: 8px;
+        padding: 0.6rem 1.5rem;
+        font-weight: 700;
+        font-size: 0.85rem;
+        color: #999;
+        letter-spacing: 0.05em;
+      }
+
+      /* FEATURES */
+      .features {
+        padding: 6rem 2rem;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .section-label {
+        text-align: center;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--accent);
+        margin-bottom: 1rem;
+      }
+      .section-title {
+        text-align: center;
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        margin-bottom: 1rem;
+      }
+      .section-sub {
+        text-align: center;
+        color: var(--muted);
+        font-size: 1.05rem;
+        max-width: 520px;
+        margin: 0 auto 4rem;
+        line-height: 1.7;
+      }
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+      }
+      .feature-card {
+        background: var(--surface);
+        border-radius: 1.25rem;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .feature-icon {
+        width: 44px;
+        height: 44px;
+        background: var(--accent);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+      }
+      .feature-card h3 { font-size: 1rem; font-weight: 700; }
+      .feature-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+
+      /* TESTIMONIALS */
+      .testimonials {
+        background: var(--surface);
+        padding: 6rem 2rem;
+      }
+      .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .testimonial-card {
+        background: var(--white);
+        border-radius: 1.25rem;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+      .stars { color: #f59e0b; font-size: 0.9rem; letter-spacing: 2px; }
+      .testimonial-card p { font-size: 0.95rem; line-height: 1.7; color: #333; }
+      .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+      .avatar {
+        width: 40px; height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent), var(--accent-light));
+        flex-shrink: 0;
+      }
+      .author-name { font-weight: 600; font-size: 0.875rem; }
+      .author-role { font-size: 0.8rem; color: var(--muted); }
+
+      /* CTA */
+      .cta-section {
+        padding: 7rem 2rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+      }
+      .cta-section h2 {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        max-width: 600px;
+      }
+      .cta-section p { color: var(--muted); font-size: 1.05rem; max-width: 460px; line-height: 1.7; }
+
+      /* FOOTER */
+      footer {
+        border-top: 1px solid #eee;
+        padding: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- NAV -->
+    <nav>
+      <div class="logo">Iamonewith</div>
+      <ul class="nav-links">
+        <li><a href="#">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Work</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+      <a href="#" class="nav-cta">Get in touch</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-badge">Now open for new clients</div>
+      <h1>Your big bold <span>headline</span> goes right here</h1>
+      <p>This is placeholder copy describing what you do, who you help, and why it matters. Replace this with your real message.</p>
+      <div class="hero-buttons">
+        <a href="#" class="btn-primary">Get started</a>
+        <a href="#" class="btn-secondary">See our work</a>
+      </div>
+      <div class="hero-image">[ Hero image or screenshot goes here ]</div>
+    </section>
+
+    <!-- LOGOS -->
+    <section class="logos">
+      <p>Trusted by great companies</p>
+      <div class="logo-row">
+        <div class="logo-pill">ACME CO</div>
+        <div class="logo-pill">STUDIO X</div>
+        <div class="logo-pill">BRANDCO</div>
+        <div class="logo-pill">VENTURES</div>
+        <div class="logo-pill">LAUNCHPAD</div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features">
+      <div class="section-label">What we do</div>
+      <h2 class="section-title">Everything you need, nothing you don't</h2>
+      <p class="section-sub">Placeholder description of your core offering. Edit these cards to match your actual services.</p>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">✦</div>
+          <h3>Service one</h3>
+          <p>A short description of this service and the value it delivers to your clients or customers.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">◈</div>
+          <h3>Service two</h3>
+          <p>A short description of this service and the value it delivers to your clients or customers.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⬡</div>
+          <h3>Service three</h3>
+          <p>A short description of this service and the value it delivers to your clients or customers.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">◎</div>
+          <h3>Service four</h3>
+          <p>A short description of this service and the value it delivers to your clients or customers.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">✿</div>
+          <h3>Service five</h3>
+          <p>A short description of this service and the value it delivers to your clients or customers.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⬟</div>
+          <h3>Service six</h3>
+          <p>A short description of this service and the value it delivers to your clients or customers.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+      <div class="section-label">Kind words</div>
+      <h2 class="section-title">What people are saying</h2>
+      <p class="section-sub">Replace these with real testimonials from happy clients.</p>
+      <br />
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>"Working with this team completely changed how we think about our online presence. The results speak for themselves."</p>
+          <div class="testimonial-author">
+            <div class="avatar"></div>
+            <div>
+              <div class="author-name">Jane Smith</div>
+              <div class="author-role">CEO, Acme Co</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>"Exactly what we needed. Fast, professional, and genuinely invested in making sure we were happy with the outcome."</p>
+          <div class="testimonial-author">
+            <div class="avatar"></div>
+            <div>
+              <div class="author-name">Mark Johnson</div>
+              <div class="author-role">Founder, Studio X</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>"I was skeptical at first but the process was seamless. Would recommend to anyone looking for quality work."</p>
+          <div class="testimonial-author">
+            <div class="avatar"></div>
+            <div>
+              <div class="author-name">Sarah Lee</div>
+              <div class="author-role">Director, Launchpad</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <h2>Ready to get started?</h2>
+      <p>This is your closing pitch. Make it short, direct, and hard to ignore.</p>
+      <a href="#" class="btn-primary">Let's talk</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="logo">Iamonewith</div>
+      <div>© 2026 Iamonewith. All rights reserved.</div>
+      <div style="display:flex;gap:1.5rem;">
+        <a href="#" style="color:var(--muted);text-decoration:none;">Privacy</a>
+        <a href="#" style="color:var(--muted);text-decoration:none;">Terms</a>
+        <a href="#" style="color:var(--muted);text-decoration:none;">Contact</a>
+      </div>
+    </footer>
+
+  </body>
 </html>
