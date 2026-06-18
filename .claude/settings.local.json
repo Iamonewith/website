@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create *)",
+      "Read(//usr/local/bin/**)",
+      "Read(//Users/kristiesteers/.nvm/versions/**)",
+      "Bash(command -v node)",
+      "Bash(curl -fsSL https://nodejs.org/dist/v20.19.1/node-v20.19.1-darwin-arm64.tar.gz -o /tmp/node.tar.gz)",
+      "Bash(mkdir -p ~/node)",
+      "Bash(tar -xzf /tmp/node.tar.gz -C ~/node --strip-components=1)",
+      "Bash(curl -fsSL https://github.com/cli/cli/releases/download/v2.71.0/gh_2.71.0_macOS_arm64.tar.gz -o /tmp/gh.tar.gz)",
+      "Bash(curl -sI https://github.com/cli/cli/releases/latest)",
+      "Bash(curl -fsSL https://github.com/cli/cli/releases/download/v2.95.0/gh_2.95.0_macOS_arm64.tar.gz -o /tmp/gh.tar.gz)",
+      "Bash(tar -xzf /tmp/gh.tar.gz -C /tmp/ghcli --strip-components=1)",
+      "Bash(mkdir -p /tmp/ghcli)",
+      "Bash(cp /tmp/ghcli/bin/gh ~/node/bin/)",
+      "Bash(gh --version)",
+      "Bash(curl -fsSL \"https://github.com/cli/cli/releases/download/v2.95.0/gh_2.95.0_macOS_arm64.zip\" -o /tmp/gh.zip)",
+      "Bash(unzip -q /tmp/gh.zip -d /tmp/ghcli)",
+      "Read(//private/tmp/ghcli/**)",
+      "Bash(cp /tmp/ghcli/gh_2.95.0_macOS_arm64/bin/gh ~/node/bin/)"
+    ]
+  }
+}
